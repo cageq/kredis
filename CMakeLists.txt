@@ -7,20 +7,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-include ("../../env.cmake")
  
 
-include_directories("${LIBEVENTROOT}/include")
-include_directories("${LIBFMTROOT}/include") 
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/opt/fmt)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/opt/hiredis)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/opt/fmt/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/knet/klog/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/knet/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/knet/deps/include)
 
 
-link_directories(${WORKROOT}/deps/lib)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/knet/deps/lib)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/knet/deps/lib64)
 
  
  
@@ -36,12 +34,12 @@ elseif(UNIX)
   #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -pthread -pg -g -DNDEBUG -Wunused-value ")
 elseif(WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -D NDEBUG")
-      add_compile_options("/std:c++17") 
+	add_compile_options("/std:c++17") 
 endif()
 
   
 
 add_executable(kredis_client samples/kredis_client.cpp)
 
-target_link_libraries(kredis_client ${FMTLIB} )
+target_link_libraries(kredis_client fmt)
  

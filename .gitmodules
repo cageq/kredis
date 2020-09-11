@@ -1,0 +1,3 @@
+[submodule "lib/knet"]
+	path = lib/knet
+	url = https://github.com/cageq/knet.git

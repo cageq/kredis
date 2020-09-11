@@ -16,7 +16,7 @@ using RedisResultHandler = std::function<void(const RedisResult & )>;
 
 
 using namespace knet::tcp; 
-class RedisConnection : public Connection<RedisConnection>{
+class RedisConnection : public TcpConnection<RedisConnection>{
   
 public: 
  
@@ -33,7 +33,7 @@ public:
 		send(query.command());  
     }
 
-    uint32_t  process_result(const std::string_view &msg   , MessageStatus status)
+    uint32_t  process_result(const std::string &msg   , knet::MessageStatus status)
     {
         wlog("received data {} ",msg ); 
 		auto rst = redis_parser.parse(msg.data(),msg.length() ); 

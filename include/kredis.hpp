@@ -7,7 +7,7 @@
  * @version 1.0.0
  * @date 2020-08-01
  */
-#include "event_worker.hpp"
+#include "knet.hpp"
 #include "redis_query.hpp"
 #include "redis_connection.hpp"
 
@@ -48,5 +48,5 @@ public:
 private:
 	uint32_t redis_index = 0;
 	std::vector<RedisConnectionPtr> redis_connections;
-	Connector<RedisConnection> redis_connector;
+	TcpConnector<RedisConnection> redis_connector;
 };
